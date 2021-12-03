@@ -17,13 +17,20 @@
             position: absolute;
             top: 0;
             bottom: 0;
+            height: 90%;
             width: 100%;
+        }
+
+        #store{
+            position: absolute;
+            top: 90%;
         }
     </style>
 </head>
 
 <body>
     <div id="map"></div>
+    <div id="store">1</div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiZ2F1dGFtLWFnIiwiYSI6ImNrd3B6NGI2dDBobmUyb284ZTZtNTN3b3IifQ.tqxdQcMn0D1M9aepIoin4g';
         const map = new mapboxgl.Map({
