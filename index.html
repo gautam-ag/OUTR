@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Locate the user</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            height: 90%;
+            width: 100%;
+        }
+
+        #store{
+            position: absolute;
+            top: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id="store">1</div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZ2F1dGFtLWFnIiwiYSI6ImNrd3B6NGI2dDBobmUyb284ZTZtNTN3b3IifQ.tqxdQcMn0D1M9aepIoin4g';
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [-96, 37.8], // starting position
+            zoom: 3 // starting zoom
+        });
+
+
+        // Initialize the GeolocateControl.
+        const geolocate = new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true,
+            showUserHeading: true
+        });
+        // Add the control to the map.
+        map.addControl(geolocate);
+        // Set an event listener that fires
+        // when a geolocate event occurs.
+        geolocate.on('geolocate', () => {
+            console.log('A geolocate event has occurred.');
+        });
+    </script>
+
+</body>
+
+</html>
