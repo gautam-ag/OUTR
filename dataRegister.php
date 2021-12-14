@@ -7,17 +7,12 @@
     // declaring variables!
     $name = "";
     $email = "";
-    $domain1 = "";
-    $domain2 = "";
-    $branch = "";
-    $year = "";
+    $registrationNo = "";
     $password = "";
     $encPassword = "";
     $salt = uniqid();
-    $createdOn = date('d-m-Y H:i');
+    $createdAt = date('d-m-Y H:i');
     $lastUpdatedOn = date('d-m-Y H:i');
-    $registrationNo = "";
-    $skills = "";
 
     // getting form data!
     if(isset($_POST['name'])){
@@ -32,52 +27,24 @@
     
     }
 
-    if(isset($_POST['domain1'])){
-    
-        $domain1 = $_POST['domain1'];
-    
-    }
-
-    if(isset($_POST['domain2'])) {
-
-        $domain2 = $_POST['domain2'];
-
-    }
-
-    if(isset($_POST['branch'])){
-    
-        $branch = $_POST['branch'];
-    
-    }
-
-    if(isset($_POST['year'])){
-    
-        $year = $_POST['year'];
-    
-    }
-
-    if(isset($_POST['password'])){
-    
-        $password = $_POST['password'];
-    
-    }
-
-    if(isset($_POST['skills'])){
-
-        $skills = $_POST['skills'];
-
-    }
-
     if(isset($_POST['registrationNo'])){
-
+    
         $registrationNo = $_POST['registrationNo'];
+    
+    }
+
+    if(isset($_POST['password'])) {
+
+        $password = $_POST['password'];
 
     }
 
-    if($name != "" && $email != "" && $domain1 != "" && $branch != "" && $year != "" && $password != "" && $skills != "" && $registrationNo != ""){
+    
+
+    if($name != "" && $email != "" && $registrationNo != "" && $password!= ""){
 
         // if user already exists!
-        $checkUser = "SELECT * FROM `users` WHERE `email` = '$email'";
+        $checkUser = "SELECT * FROM `registration` WHERE `email` = '$email'";
         $checkUserRes = mysqli_query($conn,$checkUser) or die(mysqli_error($conn));
 
         if(mysqli_num_rows($checkUserRes) > 0) {
@@ -90,8 +57,8 @@
             $encPassword = md5(md5($password).md5($salt));
             
             // register user!
-            $registerUser = "INSERT INTO `users` (`name`, `email`, `domain1`, `domain2`, `branch`, `year`, `password`,`salt`,`createdOn`,`lastUpdatedOn`, `skills`,`registrationNo`) 
-                                            VALUES ('$name', '$email', '$domain1', '$domain2', '$branch', '$year', '$encPassword','$salt','$createdOn','$lastUpdatedOn', '$skills', '$registrationNo')";
+            $registerUser = "INSERT INTO `registration` (`name`, `email`, `registrationNo`, `password`, `salt`,`createdAt`,`lastUpdatedOn`) 
+                                            VALUES ('$name', '$email', '$registrationNo', '$encPassword', '$salt','$createdAt','$lastUpdatedOn')";
 
             $registerUserRes = mysqli_query($conn, $registerUser) or die(mysqli_error($conn));
 
